@@ -9,31 +9,31 @@ class Command(BaseCommand):
         flavors = [
             {
                 "name": "Chocolat Orange",
-                "price_per_scoop": 2.5,
+                "price_per_scoop": 2.0,
                 "quantity_available": 40,
                 "image_path": "images/chocolat-orange.png",
             },
             {
                 "name": "Sirop d'érable Noix",
-                "price_per_scoop": 3.0,
+                "price_per_scoop": 2.0,
                 "quantity_available": 40,
                 "image_path": "images/maple-walnut.png",
             },
             {
                 "name": "Menthe Chocolat",
-                "price_per_scoop": 2.8,
+                "price_per_scoop": 2.0,
                 "quantity_available": 40,
                 "image_path": "images/mint-chocolat.png",
             },
             {
                 "name": "Vanille Fraise Chocolat",
-                "price_per_scoop": 2.7,
+                "price_per_scoop": 2.0,
                 "quantity_available": 40,
                 "image_path": "images/strawberry-vanille-chocolate.png",
             },
             {
                 "name": "Chocolat Blanc Framboise",
-                "price_per_scoop": 3.2,
+                "price_per_scoop": 2.0,
                 "quantity_available": 40,
                 "image_path": "images/white-chocolate-raspberry.png",
             },

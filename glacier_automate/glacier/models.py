@@ -43,7 +43,7 @@ class OrderFlavor(models.Model):
 
     def save(self, *args, **kwargs):
         if self.quantity > self.flavor.quantity_available:
-            raise ValueError("Quantité insuffisante de parfum disponible.")
+            raise ValueError("Insufficient quantity of flavor available.")
         self.flavor.quantity_available -= self.quantity
         self.flavor.save()
         super().save(*args, **kwargs)

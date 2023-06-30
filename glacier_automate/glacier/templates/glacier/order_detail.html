@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Détails de commande</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .order-info {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .order-info p {
+        margin: 10px 0;
+      }
+
+      .flavor-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .flavor-list li {
+        margin-bottom: 5px;
+      }
+
+      .flavor-list li span {
+        font-weight: bold;
+      }
+
+      .total-price {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Détail de la commande</h1>
+    <div class="order-info">
+      <p><strong>Code de la commande :</strong> {{ order.code }}</p>
+      <h3>Parfum(s) :</h3>
+      <ul class="flavor-list">
+        {% for order_flavor in order.orderflavor_set.all %}
+        <li>
+          <span>{{ order_flavor.flavor.name }}</span>: {{ order_flavor.quantity}} boule(s)
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="total-price">
+        <strong>Prix total :</strong> {{ order.calculate_total_price }} €
+      </p>
+    </div>
+  </body>
+</html>
