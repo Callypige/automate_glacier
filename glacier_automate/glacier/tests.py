@@ -1,5 +1,34 @@
 from django.test import TestCase
 from glacier.models import Flavor, Order, OrderFlavor
+from django.core.management import call_command
+from django.core.management.base import CommandError
+from io import StringIO
+
+
+class CreateFlavorsCommandTestCase(TestCase):
+    def test_create_flavors_command(self):
+        out = StringIO()
+        call_command("load_initial_data", stdout=out)
+        output = out.getvalue()
+
+        flavors = Flavor.objects.all()
+        # Check that all 5 flavors have been created
+        self.assertEqual(len(flavors), 5)
+
+        for flavor in flavors:
+            self.assertIn(
+                flavor.name, output
+            )  # Check that the flavor name is present in the output
+
+            # Check that the flavor image has been correctly saved
+            self.assertTrue(flavor.image)
+            self.assertTrue(flavor.image.name.startswith("images/"))
+
+        self.assertIn("Created flavor: Chocolat Orange", output)
+        self.assertIn("Created flavor: Sirop d'érable Noix", output)
+        self.assertIn("Created flavor: Menthe Chocolat", output)
+        self.assertIn("Created flavor: Vanille Fraise Chocolat", output)
+        self.assertIn("Created flavor: Chocolat Blanc Framboise", output)
 
 
 class FlavorOrderIntegrationTests(TestCase):
