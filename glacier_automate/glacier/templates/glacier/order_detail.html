@@ -61,5 +61,7 @@
         <strong>Prix total :</strong> {{ order.calculate_total_price }} €
       </p>
     </div>
+    <a href="{% url 'create_order' %}">Créer une commande</a>
+    <a href="{% url 'retrieve_order' %}" class="btn btn-primary">Retrouver une commande</a>
   </body>
 </html>

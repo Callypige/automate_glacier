@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enter Order Number</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 0 auto;
+        margin-top: 50px;
+      }
+
+      .form-container input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .form-container button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .form-container button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Enter Order Number</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="order_code" placeholder="Order Code" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <a href="{% url 'create_order' %}">Créer une commande</a>
+  </body>
+</html>

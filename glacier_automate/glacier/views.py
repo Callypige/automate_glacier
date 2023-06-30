@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from glacier.models import Flavor, Order, OrderFlavor
 from django.template import loader
 from django.http import HttpResponse
@@ -31,4 +31,16 @@ def order_detail(request, order_id):
 
     template = loader.get_template("glacier/order_detail.html")
     context = {"order": order, "flavors": flavors, "total_price": total_price}
+    return HttpResponse(template.render(context, request))
+
+
+def retrieve_order(request):
+    if request.method == "POST":
+        order_code = request.POST.get("order_code")
+        order = get_object_or_404(Order, code=order_code)
+        return redirect("order_detail", order_id=order.id)
+
+    template = loader.get_template("glacier/retrieve_order.html")
+    context = {}
+
     return HttpResponse(template.render(context, request))
