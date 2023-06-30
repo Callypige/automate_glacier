@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 
 class Flavor(models.Model):
@@ -19,17 +20,17 @@ class Flavor(models.Model):
 
 class Order(models.Model):
     flavors = models.ManyToManyField(Flavor, through="OrderFlavor")
+    code = models.CharField(max_length=10, unique=True)
+
+    def generate_order_code(self):
+        self.code = str(uuid.uuid4().hex[:10])
+        self.save()
 
     def calculate_total_price(self):
         total_price = 0
         for order_flavor in self.orderflavor_set.all():
             total_price += order_flavor.quantity * order_flavor.flavor.price_per_scoop
         return total_price
-
-    def display_order(self):
-        print("Order:")
-        for order_flavor in self.orderflavor_set.all():
-            print(f"{order_flavor.flavor.name} ({order_flavor.quantity} boules)")
 
     def __str__(self):
         return f"Order #{self.id}"
